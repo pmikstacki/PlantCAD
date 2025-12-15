@@ -1,0 +1,72 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlantCad.Gui.ViewModels.Dialogs"
+        x:Class="PlantCad.Gui.Views.Dialogs.BlockDetailsDialog"
+        x:DataType="vm:BlockDetailsDialogViewModel"
+        Width="640" Height="520"
+        Title="Block Details">
+  <DockPanel Margin="12">
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,8">
+      <TextBlock Text="Block:" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding BlockName}" FontWeight="Bold" VerticalAlignment="Center"/>
+      <TextBlock Text=" | Source:" Margin="8,0,0,0" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding SourcePath}" Foreground="#777" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+    </StackPanel>
+
+    <Grid RowDefinitions="Auto,*" DockPanel.Dock="Top" Margin="0,0,0,8">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+
+      <Border Grid.Row="0" Grid.Column="0" BorderBrush="#CCC" BorderThickness="1" CornerRadius="4" Padding="8" Margin="0,0,8,0">
+        <StackPanel>
+          <TextBlock Text="Extents" FontWeight="Bold" Margin="0,0,0,4"/>
+          <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <TextBlock Text="MinX:" Grid.Row="0" Grid.Column="0"/>
+            <TextBlock Text="{Binding Extents.MinX}" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="MinY:" Grid.Row="1" Grid.Column="0"/>
+            <TextBlock Text="{Binding Extents.MinY}" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="MaxX:" Grid.Row="2" Grid.Column="0"/>
+            <TextBlock Text="{Binding Extents.MaxX}" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="MaxY:" Grid.Row="3" Grid.Column="0"/>
+            <TextBlock Text="{Binding Extents.MaxY}" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="Valid:" Grid.Row="4" Grid.Column="0"/>
+            <TextBlock Text="{Binding ExtentsValid}" Grid.Row="4" Grid.Column="1"/>
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Grid.Row="0" Grid.Column="1" BorderBrush="#CCC" BorderThickness="1" CornerRadius="4" Padding="8">
+        <StackPanel>
+          <TextBlock Text="Layers" FontWeight="Bold" Margin="0,0,0,4"/>
+          <ListBox ItemsSource="{Binding Layers}" Height="120">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="x:String">
+                <TextBlock Text="{Binding .}"/>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Border>
+    </Grid>
+
+    <Grid RowDefinitions="* , Auto">
+      <Border Grid.Row="0" BorderBrush="#CCC" BorderThickness="1" CornerRadius="4" Padding="8">
+        <DockPanel>
+          <TextBlock Text="Entities" FontWeight="Bold" DockPanel.Dock="Top"/>
+          <DataGrid ItemsSource="{Binding Entities}" AutoGenerateColumns="False" CanUserSortColumns="True">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Type" Binding="{Binding Name}"/>
+              <DataGridTextColumn Header="Count" Binding="{Binding Count}"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </Border>
+
+      <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8" Margin="0,8,0,0">
+        <Button Content="Close" IsDefault="True" Click="OnClose"/>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
+</Window>

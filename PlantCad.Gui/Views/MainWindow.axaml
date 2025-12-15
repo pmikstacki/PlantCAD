@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlantCad.Gui.ViewModels"
+        xmlns:dock="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PlantCad.Gui.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PlantCad.Gui">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open..." Command="{Binding OpenFileCommand}"/>
+                <Separator />
+                <MenuItem Header="E_xit" Command="{Binding ExitCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Plants">
+                <MenuItem Header="_New Database..." Command="{Binding NewPlantDbCommand}" />
+                <MenuItem Header="_Open Database..." Command="{Binding OpenPlantDbCommand}" />
+            </MenuItem>
+            <MenuItem Header="_View">
+                <MenuItem Header="_Tools" ItemsSource="{Binding MenuChoices}" />
+                <Separator />
+                <MenuItem Header="Write Test Log" Command="{Binding TestLogCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Window">
+                <MenuItem Header="Save Layout" Command="{Binding SaveLayoutCommand}"/>
+                <MenuItem Header="Load Layout" Command="{Binding LoadLayoutCommand}"/>
+                <MenuItem Header="Reset Layout" Command="{Binding ResetLayoutCommand}"/>
+            </MenuItem>
+        </Menu>
+        <dock:DockControl Factory="{Binding Factory}" Layout="{Binding Layout}"/>
+    </DockPanel>
+
+</Window>

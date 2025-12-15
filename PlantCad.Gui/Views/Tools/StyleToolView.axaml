@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             x:Class="PlantCad.Gui.Views.Tools.StyleToolView"
+             x:DataType="vm:StyleToolViewModel"
+             x:Name="Root">
+  <ScrollViewer>
+    <StackPanel Margin="8" Spacing="8">
+      <TextBlock Text="Style Options" FontWeight="Bold"/>
+
+      <CheckBox Content="Use layer colors" IsChecked="{Binding UseLayerColors, Mode=TwoWay}"/>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Stroke width:"/>
+        <TextBox Width="80" Text="{Binding StrokeWidth, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Insert radius:"/>
+        <TextBox Width="80" Text="{Binding InsertRadius, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Font family:"/>
+        <TextBox Width="180" Text="{Binding FontFamily, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Default stroke color (#AARRGGBB):"/>
+        <TextBox Width="130" Text="{Binding DefaultStrokeColor, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Default text color (#AARRGGBB):"/>
+        <TextBox Width="130" Text="{Binding DefaultTextColor, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Default fill color (#AARRGGBB):"/>
+        <TextBox Width="130" Text="{Binding DefaultFillColor, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Point size (px):"/>
+        <TextBox Width="80" Text="{Binding PointSizePx, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="6">
+        <TextBlock VerticalAlignment="Center" Text="Leader arrow size (px):"/>
+        <TextBox Width="80" Text="{Binding LeaderArrowSizePx, Mode=TwoWay}"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <Button Content="Apply" Command="{Binding ApplyCommand}" Width="100"/>
+        <Button Content="Reset" Command="{Binding ResetCommand}" Width="100"/>
+      </StackPanel>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

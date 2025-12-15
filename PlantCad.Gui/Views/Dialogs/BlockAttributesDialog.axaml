@@ -1,0 +1,43 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlantCad.Gui.ViewModels.Dialogs"
+        x:Class="PlantCad.Gui.Views.Dialogs.BlockAttributesDialog"
+        x:DataType="vm:BlockAttributesDialogViewModel"
+        Width="780" Height="560"
+        Title="Block Attributes">
+  <DockPanel Margin="12">
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,8">
+      <TextBlock Text="Block:" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding BlockName}" FontWeight="Bold" VerticalAlignment="Center"/>
+      <TextBlock Text=" | Source:" Margin="8,0,0,0" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding SourcePath}" Foreground="#777" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+      <Border Background="#EEE" Padding="6,2" CornerRadius="4" Margin="12,0,0,0" VerticalAlignment="Center">
+        <TextBlock Text="{Binding HasUnsavedChanges, StringFormat=Unsaved: {0}}"/>
+      </Border>
+    </StackPanel>
+
+    <Grid RowDefinitions="*,Auto">
+      <DataGrid Grid.Row="0"
+                ItemsSource="{Binding Items}"
+                AutoGenerateColumns="False"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="True"
+                Margin="0,0,0,8">
+        <DataGrid.Columns>
+          <DataGridTextColumn Header="Tag" Binding="{Binding Tag, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200"/>
+          <DataGridTextColumn Header="Prompt" Binding="{Binding Prompt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="250"/>
+          <DataGridTextColumn Header="Default" Binding="{Binding DefaultValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+          <DataGridTextColumn Header="Flags" Binding="{Binding Flags, Mode=TwoWay}" Width="120"/>
+          <DataGridTextColumn Header="Type" Binding="{Binding Type, Mode=TwoWay}" Width="140"/>
+        </DataGrid.Columns>
+      </DataGrid>
+
+      <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+        <Button Content="Add" Command="{Binding AddCommand}"/>
+        <Button Content="Remove" Command="{Binding RemoveCommand}" CommandParameter="{Binding SelectedItem, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+        <Button Content="Save" Command="{Binding SaveCommand}" IsEnabled="{Binding HasUnsavedChanges}"/>
+        <Button Content="Close" Click="OnClose"/>
+      </StackPanel>
+    </Grid>
+  </DockPanel>
+</Window>

@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             x:Class="PlantCad.Gui.Views.Tools.LogsToolView"
+             x:DataType="vm:LogsToolViewModel">
+  <Grid>
+    <TextBox Margin="4"
+             IsReadOnly="True"
+             AcceptsReturn="True"
+             TextWrapping="Wrap"
+             ScrollViewer.VerticalScrollBarVisibility="Auto"
+             ScrollViewer.HorizontalScrollBarVisibility="Auto"
+             Text="{Binding LogText, Mode=OneWay}"/>
+  </Grid>
+</UserControl>

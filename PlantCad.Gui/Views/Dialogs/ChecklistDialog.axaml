@@ -1,0 +1,23 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlantCad.Gui.ViewModels.Dialogs"
+        x:Class="PlantCad.Gui.Views.Dialogs.ChecklistDialog"
+        x:DataType="vm:ChecklistDialogViewModel"
+        Width="420" Height="520"
+        Title="{Binding Title}">
+  <DockPanel Margin="12">
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Spacing="8">
+      <Button Content="OK" IsDefault="True" Click="OnOk"/>
+      <Button Content="Cancel" IsCancel="True"/>
+    </StackPanel>
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Items}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <CheckBox IsChecked="{Binding IsChecked}" Content="{Binding Label}"/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+</Window>

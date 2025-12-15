@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:PlantCad.Gui.ViewModels.Tools"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="PlantCad.Gui.Views.Tools.ModulesToolView"
+             x:DataType="vm:ModulesToolViewModel">
+    <Grid Margin="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Load" Command="{Binding LoadModulesCommand}"/>
+            <Button Content="Save" Command="{Binding SaveModulesCommand}"/>
+            <Button Content="Add Root" Command="{Binding AddModuleCommand}" CommandParameter="{x:Null}"/>
+            <CheckBox Content="Snap to grid" IsChecked="{Binding SnapToGrid, Mode=TwoWay}"/>
+            <Button Content="Generate Sheets (Save As)" Command="{Binding GenerateSheetsSaveAsCommand}"/>
+        </StackPanel>
+        <TreeDataGrid Grid.Row="1" Source="{Binding TreeSource}"/>
+    </Grid>
+</UserControl>

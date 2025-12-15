@@ -1,0 +1,56 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             x:Class="PlantCad.Gui.Views.Tools.MouseToolView"
+             x:DataType="vm:MouseToolViewModel">
+  <ScrollViewer>
+    <StackPanel Margin="8" Spacing="8">
+      <TextBlock Text="Mouse Settings" FontWeight="Bold" />
+
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <CheckBox IsChecked="{Binding ZoomRequiresCtrl}" Content="Wheel zoom requires Ctrl"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <CheckBox IsChecked="{Binding ZoomWithCtrlDrag}" Content="Enable Ctrl + Right-Drag zoom"/>
+      </StackPanel>
+
+      <StackPanel Orientation="Horizontal" Spacing="8">
+        <CheckBox IsChecked="{Binding ScrollUpZoomIn}" Content="Scroll up zooms in"/>
+      </StackPanel>
+
+      <Separator/>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Zoom base (per step multiplier)"/>
+        <TextBox Text="{Binding ZoomBase, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Max steps per event (wheel)"/>
+        <TextBox Text="{Binding MaxStepsPerEvent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Response exponent (scale sensitivity)"/>
+        <TextBox Text="{Binding ResponseExponent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Response min"/>
+        <TextBox Text="{Binding ResponseMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Response max"/>
+        <TextBox Text="{Binding ResponseMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="Drag pixels per step"/>
+        <TextBox Text="{Binding DragPixelsPerStep, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="120"/>
+      </StackPanel>
+
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

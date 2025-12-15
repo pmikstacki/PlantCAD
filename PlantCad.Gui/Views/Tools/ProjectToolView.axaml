@@ -1,0 +1,221 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:toolvm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:controls="using:PlantCad.Gui.Controls"
+             x:Class="PlantCad.Gui.Views.Tools.ProjectToolView"
+             x:DataType="vm:ProjectToolViewModel"
+             x:Name="Root">
+  <DockPanel Margin="8" LastChildFill="True">
+    <TabControl>
+      <TabItem Header="General">
+        <ScrollViewer>
+          <StackPanel Spacing="8" Margin="8">
+            <!-- File section -->
+            <TextBlock Text="File" FontWeight="Bold"/>
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="Name:"/>
+              <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Info.FileName}"/>
+
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="Path:"/>
+              <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Info.FilePath}"/>
+
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="Size (bytes):"/>
+              <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Info.FileSizeBytes}"/>
+
+              <TextBlock Grid.Row="3" Grid.Column="0" Text="Last Write (UTC):"/>
+              <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Info.LastWriteTimeUtc}"/>
+            </Grid>
+
+            <!-- Summary section -->
+            <TextBlock Text="Summary" FontWeight="Bold" Margin="0,8,0,0"/>
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="Title:"/>
+              <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Info.Title}"/>
+
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="Subject:"/>
+              <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Info.Subject}"/>
+
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="Author:"/>
+              <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Info.Author}"/>
+
+              <TextBlock Grid.Row="3" Grid.Column="0" Text="Keywords:"/>
+              <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Info.Keywords}"/>
+
+              <TextBlock Grid.Row="4" Grid.Column="0" Text="Comments:"/>
+              <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Info.Comments}"/>
+
+              <TextBlock Grid.Row="5" Grid.Column="0" Text="Last Saved By:"/>
+              <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Info.LastSavedBy}"/>
+
+              <TextBlock Grid.Row="6" Grid.Column="0" Text="Revision:"/>
+              <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Info.RevisionNumber}"/>
+
+              <TextBlock Grid.Row="7" Grid.Column="0" Text="Hyperlink Base:"/>
+              <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Info.HyperlinkBase}"/>
+
+              <TextBlock Grid.Row="8" Grid.Column="0" Text="Created:"/>
+              <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Info.CreatedDate}"/>
+
+              <TextBlock Grid.Row="9" Grid.Column="0" Text="Modified:"/>
+              <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Info.ModifiedDate}"/>
+            </Grid>
+
+            <!-- Header section -->
+            <TextBlock Text="Header" FontWeight="Bold" Margin="0,8,0,0"/>
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="ACAD Version:"/>
+              <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Info.AcadVersion}"/>
+
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="Units:"/>
+              <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Info.Units}"/>
+
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="Code Page:"/>
+              <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Info.CodePage}"/>
+
+              <TextBlock Grid.Row="3" Grid.Column="0" Text="Current Layer:"/>
+              <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Info.CurrentLayerName}"/>
+
+              <TextBlock Grid.Row="4" Grid.Column="0" Text="Current TextStyle:"/>
+              <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Info.CurrentTextStyleName}"/>
+
+              <TextBlock Grid.Row="5" Grid.Column="0" Text="Current DimStyle:"/>
+              <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Info.CurrentDimensionStyleName}"/>
+
+              <TextBlock Grid.Row="6" Grid.Column="0" Text="Model Ext Min X:"/>
+              <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Info.ModelExtMinX}"/>
+
+              <TextBlock Grid.Row="7" Grid.Column="0" Text="Model Ext Min Y:"/>
+              <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Info.ModelExtMinY}"/>
+
+              <TextBlock Grid.Row="8" Grid.Column="0" Text="Model Ext Min Z:"/>
+              <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Info.ModelExtMinZ}"/>
+
+              <TextBlock Grid.Row="9" Grid.Column="0" Text="Model Ext Max X:"/>
+              <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Info.ModelExtMaxX}"/>
+
+              <TextBlock Grid.Row="10" Grid.Column="0" Text="Model Ext Max Y:"/>
+              <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Info.ModelExtMaxY}"/>
+
+              <TextBlock Grid.Row="11" Grid.Column="0" Text="Model Ext Max Z:"/>
+              <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Info.ModelExtMaxZ}"/>
+            </Grid>
+
+            <!-- Collections section -->
+            <TextBlock Text="Collections (Counts)" FontWeight="Bold" Margin="0,8,0,0"/>
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" ColumnSpacing="8" RowSpacing="4">
+              <TextBlock Grid.Row="0" Grid.Column="0" Text="Entities:"/>
+              <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Info.EntitiesTotal}"/>
+
+              <TextBlock Grid.Row="1" Grid.Column="0" Text="Layers:"/>
+              <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Info.LayersCount}"/>
+
+              <TextBlock Grid.Row="2" Grid.Column="0" Text="Block Records:"/>
+              <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Info.BlockRecordsCount}"/>
+
+              <TextBlock Grid.Row="3" Grid.Column="0" Text="LineTypes:"/>
+              <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Info.LineTypesCount}"/>
+
+              <TextBlock Grid.Row="4" Grid.Column="0" Text="TextStyles:"/>
+              <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Info.TextStylesCount}"/>
+
+              <TextBlock Grid.Row="5" Grid.Column="0" Text="DimStyles:"/>
+              <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Info.DimensionStylesCount}"/>
+
+              <TextBlock Grid.Row="6" Grid.Column="0" Text="Views:"/>
+              <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Info.ViewsCount}"/>
+
+              <TextBlock Grid.Row="7" Grid.Column="0" Text="VPorts:"/>
+              <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Info.VPortsCount}"/>
+
+              <TextBlock Grid.Row="8" Grid.Column="0" Text="Layouts:"/>
+              <TextBlock Grid.Row="8" Grid.Column="1" Text="{Binding Info.LayoutsCount}"/>
+
+              <TextBlock Grid.Row="9" Grid.Column="0" Text="Groups:"/>
+              <TextBlock Grid.Row="9" Grid.Column="1" Text="{Binding Info.GroupsCount}"/>
+
+              <TextBlock Grid.Row="10" Grid.Column="0" Text="Colors:"/>
+              <TextBlock Grid.Row="10" Grid.Column="1" Text="{Binding Info.ColorsCount}"/>
+
+              <TextBlock Grid.Row="11" Grid.Column="0" Text="PDF Definitions:"/>
+              <TextBlock Grid.Row="11" Grid.Column="1" Text="{Binding Info.PdfDefinitionsCount}"/>
+            </Grid>
+
+            <!-- Custom properties table -->
+            <TextBlock Text="Custom Properties" FontWeight="Bold" Margin="0,8,0,0"/>
+            <DataGrid ItemsSource="{Binding Info.SummaryProperties}" AutoGenerateColumns="False" Height="200">
+              <DataGrid.Columns>
+                <DataGridTextColumn Header="Key" Binding="{Binding Key}" Width="200"/>
+                <DataGridTextColumn Header="Value" Binding="{Binding Value}" Width="*"/>
+              </DataGrid.Columns>
+            </DataGrid>
+          </StackPanel>
+        </ScrollViewer>
+      </TabItem>
+
+      <TabItem Header="Entities">
+        <DataGrid ItemsSource="{Binding EntityCounts}"
+                  AutoGenerateColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+            <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="Auto"/>
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+      <TabItem Header="Blocks">
+        <DataGrid ItemsSource="{Binding Blocks}"
+                  AutoGenerateColumns="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeColumns="True">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+            <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="Auto"/>
+            <DataGridTemplateColumn Header="Actions" Width="Auto">
+              <DataGridTemplateColumn.CellTemplate>
+                <DataTemplate>
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Button Content="Details…"
+                            Command="{Binding DataContext.ShowBlockDetailsCommand, ElementName=Root}"
+                            CommandParameter="{Binding .}"/>
+                    <Button Content="Attributes…"
+                            Command="{Binding DataContext.OpenBlockAttributesCommand, ElementName=Root}"
+                            CommandParameter="{Binding .}"/>
+                  </StackPanel>
+                </DataTemplate>
+              </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+          </DataGrid.Columns>
+        </DataGrid>
+      </TabItem>
+
+      <TabItem Header="Hatches">
+        <ScrollViewer>
+          <ItemsControl ItemsSource="{Binding Hatches}">
+            <ItemsControl.ItemsPanel>
+              <ItemsPanelTemplate>
+                <WrapPanel />
+              </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate x:DataType="vm:HatchUsageItem">
+                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Margin="4">
+                  <StackPanel Width="180" Spacing="4" Margin="6">
+                    <Border Width="128" Height="128" HorizontalAlignment="Center" Background="#00000000">
+                      <controls:HatchDisplay PatternName="{Binding Name}"
+                                             Width="128" Height="128"
+                                             StrokeColor="Black" StrokeThickness="1"/>
+                    </Border>
+                    <TextBlock Text="{Binding Name}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                  </StackPanel>
+                </Border>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl>
+  </DockPanel>
+</UserControl>

@@ -1,0 +1,62 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Assets\HATCH\" />
+    <Folder Include="Controls\Common\" />
+    <Folder Include="Models\" />
+    <Content Include="Assets\HATCH\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Skia" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.3.5" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="11.3.0.6" />
+    <PackageReference Include="Clipper2" Version="1.5.4" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.5">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Dock.Avalonia" Version="11.3.2.2" />
+    <PackageReference Include="Dock.Model.Mvvm" Version="11.3.2.2" />
+    <PackageReference Include="Dock.Avalonia.Themes.Fluent" Version="11.3.2.2" />
+    <PackageReference Include="Dock.Serializer.Newtonsoft" Version="11.3.2.2" />
+    <PackageReference Include="IconPacks.Avalonia" Version="1.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
+    <PackageReference Include="protobuf-net" Version="3.2.56" />
+    <PackageReference Include="Semi.Avalonia" Version="11.2.1.9" />
+    <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.9" />
+    <PackageReference Include="Semi.Avalonia.Dock" Version="11.3.2" />
+    <PackageReference Include="Semi.Avalonia.TreeDataGrid" Version="11.0.10.4" />
+    <PackageReference Include="bodong.Avalonia.PropertyGrid" Version="11.3.3.2" />
+    <PackageReference Include="Dapper" Version="2.1.35" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../PlantCad.Core/PlantCad.Core.csproj" />
+  </ItemGroup>
+  <!-- Exclude deprecated SpatialIndex from compilation -->
+  <ItemGroup>
+    <Compile Remove="Controls/CadViewport/HitTesting/SpatialIndex.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="netDxf" Version="2023.11.10" />
+    <PackageReference Include="ACadSharp" Version="3.1.32" />
+    <PackageReference Include="ClosedXML" Version="0.105.0" />
+  </ItemGroup>
+</Project>

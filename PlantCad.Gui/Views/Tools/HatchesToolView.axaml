@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:controls="using:PlantCad.Gui.Controls"
+             x:Class="PlantCad.Gui.Views.Tools.HatchesToolView"
+             x:DataType="vm:HatchesToolViewModel"
+             x:Name="Root">
+  <DockPanel Margin="8">
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Items}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:HatchesToolViewModel+HatchItem">
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Margin="4">
+              <StackPanel Width="180" Spacing="4" Margin="6">
+                <Border Width="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                        Height="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                        HorizontalAlignment="Center"
+                        Background="#00000000"
+                        ClipToBounds="True">
+                  <controls:HatchDisplay PatternName="{Binding Name}"
+                                         Width="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                                         Height="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                                         StrokeColor="Black"
+                                         StrokeThickness="1"/>
+                </Border>
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

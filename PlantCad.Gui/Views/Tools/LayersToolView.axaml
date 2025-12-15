@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:toolvm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:services="using:PlantCad.Gui.Services"
+             xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+             xmlns:tdg="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.TreeDataGrid"
+             xmlns:i="using:Avalonia.Xaml.Interactivity"
+             xmlns:behaviors="using:PlantCad.Gui.Behaviors"
+             x:Class="PlantCad.Gui.Views.Tools.LayersToolView"
+             x:DataType="vm:LayersToolViewModel"
+             x:Name="Root">
+  <Grid Margin="8">
+  <Grid.RowDefinitions>
+    <RowDefinition Height="30"></RowDefinition>
+    <RowDefinition Height="*"></RowDefinition>
+  </Grid.RowDefinitions>
+    <!-- Search bar -->
+    <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,0,0,6">
+      <TextBox Watermark="Filter: #layer:Name #type:line,polyline free text" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button MinWidth="28" ToolTip.Tip="Clear filter" Command="{Binding ClearSearchCommand, Source={x:Static services:ServiceRegistry.LayersTool}}">
+        <Panel>
+          <iconPacks:PackIconMaterial Padding="2" Kind="CloseCircleOutline" Width="20" Height="20"/>
+        </Panel>
+      </Button>
+    </StackPanel>
+    <tdg:TreeDataGrid x:Name="Tree" Grid.Row="1" Source="{Binding TreeSource}">
+      <i:Interaction.Behaviors>
+        <behaviors:ScrollIntoViewBehavior />
+      </i:Interaction.Behaviors>
+    </tdg:TreeDataGrid>
+  </Grid>
+</UserControl>

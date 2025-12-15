@@ -1,0 +1,82 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             xmlns:controls="using:PlantCad.Gui.Controls"
+             x:Class="PlantCad.Gui.Views.Tools.BlocksGalleryToolView"
+             x:DataType="vm:BlocksGalleryToolViewModel"
+             x:Name="Root">
+  <DockPanel Margin="8">
+    <WrapPanel DockPanel.Dock="Top" Margin="0,0,0,8" Orientation="Horizontal">
+      <TextBox Width="220" Watermark="Search blocks..." Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button Content="Search" Command="{Binding ReloadCommand}"/>
+      <Separator Width="10"/>
+      <TextBlock Text="Plant:" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding SelectedPlantName}" VerticalAlignment="Center" FontWeight="Bold"/>
+      <Button Content="Select…" Command="{Binding PickPlantCommand}"/>
+      <Separator Width="10"/>
+      <Button Content="Prev" Command="{Binding PrevPageCommand}"/>
+      <TextBlock Text="Page:" VerticalAlignment="Center"/>
+      <TextBlock Text="{Binding Page}" FontWeight="Bold" VerticalAlignment="Center"/>
+      <Button Content="Next" Command="{Binding NextPageCommand}"/>
+      <Separator Width="10"/>
+      <TextBlock Text="Thumb:" VerticalAlignment="Center"/>
+      <NumericUpDown Width="80" Minimum="64" Maximum="1024" Increment="32" Value="{Binding ThumbnailSize, Mode=TwoWay}"/>
+      <Separator Width="10"/>
+      <Button Content="Import DWG…" Command="{Binding ImportDwgCommand}"/>
+      <CheckBox Content="Include anonymous" IsChecked="{Binding IncludeAnonymous}" VerticalAlignment="Center"/>
+      <TextBlock Text="BG:" VerticalAlignment="Center"/>
+      <TextBox Width="100" Text="{Binding ThumbBackground, Mode=TwoWay}"/>
+    </WrapPanel>
+
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Items}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <WrapPanel />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:BlocksGalleryToolViewModel+BlockRow">
+            <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="4" Margin="4">
+              <StackPanel Width="180" Spacing="4" Margin="6">
+                <Border Background="{Binding $parent[UserControl].DataContext.ThumbBackground}"
+                        Width="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                        Height="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                        HorizontalAlignment="Center">
+                  <Image Source="{Binding Thumbnail}"
+                         Width="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                         Height="{Binding $parent[UserControl].DataContext.ThumbnailSize}"
+                         Stretch="Uniform"/>
+                </Border>
+                <TextBlock Text="{Binding Name}" FontWeight="Bold" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Text="{Binding Source}" FontSize="11" Foreground="#777" TextTrimming="CharacterEllipsis"/>
+                <TextBlock Text="{Binding UsageCount, StringFormat='Used by {0} plants'}" FontSize="11"/>
+                <WrapPanel>
+                  <Button Content="Assign"
+                          Command="{Binding $parent[UserControl].DataContext.AssignCommand}"
+                          CommandParameter="{Binding .}"/>
+                  <Button Content="Unassign"
+                          Margin="6,0,0,0"
+                          Command="{Binding $parent[UserControl].DataContext.UnassignCommand}"
+                          CommandParameter="{Binding .}"/>
+                  <Button Content="Details"
+                          Margin="6,0,0,0"
+                          Command="{Binding $parent[UserControl].DataContext.ShowDetailsCommand}"
+                          CommandParameter="{Binding .}"/>
+                  <Button Content="Attributes…"
+                          Margin="6,0,0,0"
+                          Command="{Binding $parent[UserControl].DataContext.OpenAttributesCommand}"
+                          CommandParameter="{Binding .}"/>
+                  <Button Content="Go to Plants"
+                          Margin="6,0,0,0"
+                          Command="{Binding $parent[UserControl].DataContext.GoToPlantsCommand}"
+                          CommandParameter="{Binding .}"/>
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

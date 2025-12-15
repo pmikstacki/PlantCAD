@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantCad.Core", "PlantCad.Core\PlantCad.Core.csproj", "{57CC4061-EDA9-4ED7-B619-D99EFC521D9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantCad.Gui", "PlantCad.Gui\PlantCad.Gui.csproj", "{17DBC28B-B73C-48CE-82DD-2EC4CF6C2C36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlantCad.Cli", "PlantCad.Cli\PlantCad.Cli.csproj", "{FF712E96-9895-4A3A-885C-18FFEECF55CB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57CC4061-EDA9-4ED7-B619-D99EFC521D9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57CC4061-EDA9-4ED7-B619-D99EFC521D9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57CC4061-EDA9-4ED7-B619-D99EFC521D9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57CC4061-EDA9-4ED7-B619-D99EFC521D9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17DBC28B-B73C-48CE-82DD-2EC4CF6C2C36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17DBC28B-B73C-48CE-82DD-2EC4CF6C2C36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17DBC28B-B73C-48CE-82DD-2EC4CF6C2C36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17DBC28B-B73C-48CE-82DD-2EC4CF6C2C36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF712E96-9895-4A3A-885C-18FFEECF55CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF712E96-9895-4A3A-885C-18FFEECF55CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF712E96-9895-4A3A-885C-18FFEECF55CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF712E96-9895-4A3A-885C-18FFEECF55CB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

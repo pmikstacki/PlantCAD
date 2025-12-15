@@ -1,0 +1,59 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             x:Class="PlantCad.Gui.Views.Tools.CountsToolView"
+             x:DataType="vm:CountsToolViewModel">
+  <DockPanel Margin="8">
+    <StackPanel Orientation="Horizontal" Spacing="6" DockPanel.Dock="Top">
+      <Button Content="Recount Modules" Command="{Binding RecountModulesCommand}"/>
+      <Button Content="Filter Blocks">
+        <Button.Flyout>
+          <Flyout Placement="Bottom">
+            <StackPanel Spacing="6" Margin="8">
+              <StackPanel Orientation="Horizontal" Spacing="6">
+                <Button Content="All" Command="{Binding SelectAllBlocksCommand}"/>
+                <Button Content="None" Command="{Binding ClearAllBlocksCommand}"/>
+              </StackPanel>
+              <ScrollViewer MaxHeight="320" Width="260">
+                <ItemsControl ItemsSource="{Binding BlockFilters}">
+                  <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:BlockFilterItemViewModel">
+                      <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay}"/>
+                    </DataTemplate>
+                  </ItemsControl.ItemTemplate>
+                </ItemsControl>
+              </ScrollViewer>
+            </StackPanel>
+          </Flyout>
+        </Button.Flyout>
+      </Button>
+      <Button Content="Export to Excel" Command="{Binding ExportCommand}"/>
+      <TextBlock Text="Total:" VerticalAlignment="Center" Margin="12,0,0,0"/>
+      <TextBlock Text="{Binding Total}" VerticalAlignment="Center"/>
+    </StackPanel>
+    <ScrollViewer>
+      <ItemsControl ItemsSource="{Binding Groups}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:CountsGroupViewModel">
+            <Expander>
+              <Expander.Header>
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <TextBlock Text="{Binding Name}"/>
+                  <TextBlock Text="("/>
+                  <TextBlock Text="{Binding Total}"/>
+                  <TextBlock Text=")"/>
+                </StackPanel>
+              </Expander.Header>
+              <DataGrid ItemsSource="{Binding Items}" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="True">
+                <DataGrid.Columns>
+                  <DataGridTextColumn Header="Insert" Binding="{Binding Name}" Width="*"/>
+                  <DataGridTextColumn Header="Count" Binding="{Binding Count}" Width="Auto"/>
+                </DataGrid.Columns>
+              </DataGrid>
+            </Expander>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </DockPanel>
+</UserControl>

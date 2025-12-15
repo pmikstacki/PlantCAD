@@ -1,0 +1,21 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PlantCad.Gui.App"
+             xmlns:local="using:PlantCad.Gui"
+             xmlns:iconPacks="https://github.com/MahApps/IconPacks.Avalonia"
+             xmlns:semi="https://irihi.tech/semi"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <semi:SemiTheme Locale="en-US" />
+        <semi:DockSemiTheme />
+        <semi:DataGridSemiTheme />
+        <semi:TreeDataGridSemiTheme />
+        <StyleInclude Source="avares://IconPacks.Avalonia/Icons.axaml" />
+    </Application.Styles>
+</Application>

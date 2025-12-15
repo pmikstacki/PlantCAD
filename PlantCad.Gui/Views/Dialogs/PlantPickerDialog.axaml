@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PlantCad.Gui.ViewModels.Dialogs"
+        x:Class="PlantCad.Gui.Views.Dialogs.PlantPickerDialog"
+        x:DataType="vm:PlantPickerDialogViewModel"
+        Width="520" Height="600"
+        Title="Select Plant">
+  <DockPanel Margin="12">
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="8" Margin="0,0,0,8">
+      <TextBox Width="260" Watermark="Search plants..." Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+      <Button Content="Search" Command="{Binding ReloadCommand}"/>
+    </StackPanel>
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom" HorizontalAlignment="Right" Spacing="8">
+      <Button Content="OK" IsDefault="True" Click="OnOk"/>
+      <Button Content="Cancel" IsCancel="True"/>
+    </StackPanel>
+    <ListBox ItemsSource="{Binding Items}" SelectedItem="{Binding Selected, Mode=TwoWay}">
+      <ListBox.ItemTemplate>
+        <DataTemplate x:DataType="vm:PlantPickerDialogViewModel+PlantOption">
+          <TextBlock Text="{Binding Name}"/>
+        </DataTemplate>
+      </ListBox.ItemTemplate>
+    </ListBox>
+  </DockPanel>
+</Window>

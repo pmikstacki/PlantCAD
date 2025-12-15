@@ -1,0 +1,228 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Documents"
+             x:Class="PlantCad.Gui.Views.Documents.PlantsDocumentView"
+             x:DataType="vm:PlantsDocumentViewModel"
+             x:Name="Root">
+  <DockPanel Margin="8">
+    <TabControl DockPanel.Dock="Top" Margin="0,0,0,8">
+      <TabItem Header="Main">
+        <WrapPanel VerticalAlignment="Center">
+          <TextBox Width="240" Watermark="Search..." Text="{Binding Search, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+          <Button Content="Search" Command="{Binding ReloadCommand}" />
+          <Button Content="Prev" Command="{Binding PrevPageCommand}" />
+          <TextBlock Text="Page:" VerticalAlignment="Center"/>
+          <TextBlock Text="{Binding Page}" FontWeight="Bold" VerticalAlignment="Center"/>
+          <Button Content="Next" Command="{Binding NextPageCommand}" />
+          <Separator Width="16"/>
+          <Button Content="Add" Command="{Binding AddNewCommand}" />
+          <Button Content="Save" Command="{Binding SaveSelectedCommand}" />
+          <Button Content="Delete" Command="{Binding DeleteSelectedCommand}" />
+        </WrapPanel>
+      </TabItem>
+      <TabItem Header="Filters">
+        <WrapPanel VerticalAlignment="Center">
+          <TextBlock Text="Type:" VerticalAlignment="Center"/>
+          <ComboBox Width="160"
+                    ItemsSource="{Binding TypeOptions}"
+                    SelectedItem="{Binding SelectedTypeFilter, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <TextBlock Text="Moist Min:" VerticalAlignment="Center"/>
+          <ComboBox Width="140"
+                    ItemsSource="{Binding MoistureOptions}"
+                    SelectedItem="{Binding SelectedMoistureMinFilter, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <TextBlock Text="Moist Max:" VerticalAlignment="Center"/>
+          <ComboBox Width="140"
+                    ItemsSource="{Binding MoistureOptions}"
+                    SelectedItem="{Binding SelectedMoistureMaxFilter, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <TextBlock Text="pH Min:" VerticalAlignment="Center"/>
+          <ComboBox Width="160"
+                    ItemsSource="{Binding PhClassOptions}"
+                    SelectedItem="{Binding SelectedPhClassMinFilter, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <TextBlock Text="pH Max:" VerticalAlignment="Center"/>
+          <ComboBox Width="160"
+                    ItemsSource="{Binding PhClassOptions}"
+                    SelectedItem="{Binding SelectedPhClassMaxFilter, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+          <Button Content="Clear Filters" Command="{Binding ClearFiltersCommand}"/>
+        </WrapPanel>
+      </TabItem>
+      <TabItem Header="Parameters">
+        <WrapPanel VerticalAlignment="Center">
+          <Button Content="Edit Exposures" Command="{Binding EditExposuresCommand}" />
+          <Button Content="Edit Habits" Command="{Binding EditHabitsCommand}" />
+          <Button Content="Edit Soil Traits" Command="{Binding EditSoilTraitsCommand}" />
+          <Button Content="Edit Features" Command="{Binding EditFeaturesCommand}" />
+          <Button Content="Flower Colors" Command="{Binding EditFlowerColorsCommand}" />
+          <Button Content="Fruit Colors" Command="{Binding EditFruitColorsCommand}" />
+          <Button Content="Autumn Foliage Colors" Command="{Binding EditAutumnFoliageColorsCommand}" />
+        </WrapPanel>
+      </TabItem>
+    </TabControl>
+    <DataGrid ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem, Mode=TwoWay}" AutoGenerateColumns="False">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="Auto"/>
+        <DataGridTextColumn Header="Botanical" Binding="{Binding BotanicalNameDisplay}" Width="2*"/>
+        <DataGridTextColumn Header="Genus" Binding="{Binding Genus}" Width="*"/>
+        <DataGridTextColumn Header="Species" Binding="{Binding Species}" Width="*"/>
+        <DataGridTextColumn Header="Cultivar" Binding="{Binding Cultivar}" Width="*"/>
+        <!-- Type dropdown -->
+        <DataGridTemplateColumn Header="Type">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding SelectedType.Name}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <ComboBox Width="160"
+                        ItemsSource="{Binding #Root.DataContext.TypeOptions}"
+                        SelectedItem="{Binding SelectedType, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <!-- pH editors -->
+        <DataGridTemplateColumn Header="pH Min">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding PhMin}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <NumericUpDown Minimum="0" Maximum="14" Increment="0.1" Value="{Binding PhMin, Mode=TwoWay}" Width="80"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="pH Max">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding PhMax}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <NumericUpDown Minimum="0" Maximum="14" Increment="0.1" Value="{Binding PhMax, Mode=TwoWay}" Width="80"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <!-- pH Class selectors -->
+        <DataGridTemplateColumn Header="pH Class Min">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding SelectedPhClassMin.Name}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <ComboBox Width="160"
+                        ItemsSource="{Binding #Root.DataContext.PhClassOptions}"
+                        SelectedItem="{Binding SelectedPhClassMin, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="pH Class Max">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding SelectedPhClassMax.Name}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <ComboBox Width="160"
+                        ItemsSource="{Binding #Root.DataContext.PhClassOptions}"
+                        SelectedItem="{Binding SelectedPhClassMax, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <!-- Moisture editors -->
+        <DataGridTemplateColumn Header="Moist Min">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding SelectedMoistureMin.Name}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <ComboBox Width="160"
+                        ItemsSource="{Binding #Root.DataContext.MoistureOptions}"
+                        SelectedItem="{Binding SelectedMoistureMin, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+        <DataGridTemplateColumn Header="Moist Max">
+          <DataGridTemplateColumn.CellTemplate>
+            <DataTemplate>
+              <TextBlock Text="{Binding SelectedMoistureMax.Name}"/>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellTemplate>
+          <DataGridTemplateColumn.CellEditingTemplate>
+            <DataTemplate>
+              <ComboBox Width="160"
+                        ItemsSource="{Binding #Root.DataContext.MoistureOptions}"
+                        SelectedItem="{Binding SelectedMoistureMax, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                  <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                  </DataTemplate>
+                </ComboBox.ItemTemplate>
+              </ComboBox>
+            </DataTemplate>
+          </DataGridTemplateColumn.CellEditingTemplate>
+        </DataGridTemplateColumn>
+      </DataGrid.Columns>
+    </DataGrid>
+  </DockPanel>
+</UserControl>

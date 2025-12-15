@@ -1,0 +1,196 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:PlantCad.Gui.ViewModels.Tools"
+             x:Class="PlantCad.Gui.Views.Tools.PlantDbToolView"
+             x:DataType="vm:PlantDbToolViewModel">
+  <DockPanel Margin="8">
+    <!-- Header / Toolbar -->
+    <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="8">
+      <TextBlock Text="Plant Database" FontWeight="Bold" />
+      <TextBlock Text="DB:" Margin="12,0,4,0"/>
+      <TextBlock Text="{Binding DatabasePath}"/>
+      <Button Content="Reload" Command="{Binding ReloadLookupsAsyncCommand}" Margin="12,0,0,0"/>
+      <Button Content="Save" Command="{Binding SaveLookupsAsyncCommand}"/>
+      <Button Content="Open Plants Grid" Command="{Binding OpenPlantsDocumentCommand}"/>
+    </StackPanel>
+
+    <TabControl>
+      <!-- Plant Types -->
+      <TabItem Header="Plant Types">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddPlantTypeCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=TypesGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="TypesGrid" ItemsSource="{Binding PlantTypes}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Habits -->
+      <TabItem Header="Habits">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddHabitCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=HabitsGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="HabitsGrid" ItemsSource="{Binding Habits}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Exposure -->
+      <TabItem Header="Exposure">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddExposureCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=ExposureGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="ExposureGrid" ItemsSource="{Binding Exposures}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Moisture Levels -->
+      <TabItem Header="Moisture Levels">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddMoistureLevelCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=MoistureGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="MoistureGrid" ItemsSource="{Binding MoistureLevels}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Ordinal" Binding="{Binding Ordinal}" Width="Auto"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- pH Classes -->
+      <TabItem Header="pH Classes">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddPhClassCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=PhClassGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="PhClassGrid" ItemsSource="{Binding PhClasses}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="*"/>
+              <DataGridTextColumn Header="Min pH" Binding="{Binding MinPh}" Width="Auto"/>
+              <DataGridTextColumn Header="Max pH" Binding="{Binding MaxPh}" Width="Auto"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Soil Traits -->
+      <TabItem Header="Soil Traits">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddSoilTraitCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=SoilGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="SoilGrid" ItemsSource="{Binding SoilTraits}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="*"/>
+              <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="Auto"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Colors -->
+      <TabItem Header="Colors">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddColorCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=ColorsGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="ColorsGrid" ItemsSource="{Binding Colors}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Canonical (EN)" Binding="{Binding CanonicalEn}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="*"/>
+              <DataGridTextColumn Header="Hex" Binding="{Binding Hex}" Width="Auto"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Features -->
+      <TabItem Header="Features">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddFeatureCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=FeaturesGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="FeaturesGrid" ItemsSource="{Binding Features}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="*"/>
+              <DataGridTextColumn Header="Group" Binding="{Binding GroupCode}" Width="Auto"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Foliage Persistence -->
+      <TabItem Header="Foliage Persistence">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddFoliagePersistenceCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=FpGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="FpGrid" ItemsSource="{Binding FoliagePersistences}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+      <!-- Packaging -->
+      <TabItem Header="Packaging">
+        <DockPanel>
+          <StackPanel Orientation="Horizontal" DockPanel.Dock="Top" Spacing="6" Margin="0,0,0,6">
+            <Button Content="Add" Command="{Binding AddPackagingCommand}" />
+            <Button Content="Delete Selected" Command="{Binding DeleteSelectedAsyncCommand}" CommandParameter="{Binding ElementName=PackGrid, Path=SelectedItem}" />
+          </StackPanel>
+          <DataGrid x:Name="PackGrid" ItemsSource="{Binding Packagings}" AutoGenerateColumns="False" IsReadOnly="False">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" Width="60"/>
+              <DataGridTextColumn Header="Code" Binding="{Binding Code}" Width="*"/>
+              <DataGridTextColumn Header="Name (PL)" Binding="{Binding NamePl}" Width="2*"/>
+            </DataGrid.Columns>
+          </DataGrid>
+        </DockPanel>
+      </TabItem>
+
+    </TabControl>
+  </DockPanel>
+</UserControl>

@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Spectre.Console" Version="0.51.1" />
+        <PackageReference Include="Spectre.Console.Cli" Version="0.51.1" />
+        <PackageReference Include="netDxf" Version="2023.11.10" />
+        <PackageReference Include="ACadSharp" Version="3.1.32" />
+        <PackageReference Include="ClosedXML" Version="0.105.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="13 KONCEPCJA POGORIA.dwg">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
+      <None Update="TECHNICZNY POGORIA MAGDA.dwg">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PlantCad.Core\PlantCad.Core.csproj" />
+    </ItemGroup>
+
+</Project>
